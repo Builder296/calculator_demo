@@ -30,8 +30,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Calculator Home Work',
       theme: ThemeData(
-        primarySwatch: primaryBlack,
-      ),
+          primarySwatch: primaryBlack,
+          textTheme: const TextTheme(
+            bodyText1: TextStyle(color: Colors.white),
+            bodyText2: TextStyle(color: Colors.white),
+            headline4: TextStyle(color: Colors.white),
+          )),
       home: const MyHomePage(title: 'Calculator'),
     );
   }
@@ -46,6 +50,26 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+const BoxDecoration greyCircle = BoxDecoration(
+  color: Colors.grey,
+  shape: BoxShape.circle,
+);
+
+const BoxDecoration orangeCircle = BoxDecoration(
+  color: Colors.orange,
+  shape: BoxShape.circle,
+);
+
+const BoxDecoration blackCircle = BoxDecoration(
+  color: Color.fromARGB(255, 56, 53, 49),
+  shape: BoxShape.circle,
+);
+
+const BoxDecoration blueCircle = BoxDecoration(
+  color: Colors.blue,
+  shape: BoxShape.circle,
+);
+
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
@@ -58,28 +82,150 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: false,
       ),
-      body: Center(
+      body: Container(
+        alignment: Alignment.center,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Expanded(
+              child: Text(
+                '$_counter',
+                textAlign: TextAlign.end,
+                style: Theme.of(context).textTheme.headline4,
+              ),
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Expanded(
+              child: GridView.count(
+                  primary: false,
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 4,
+                  children: <Widget>[
+                    Container(
+                      decoration: greyCircle,
+                      alignment: Alignment.center,
+                      child: const Text("C", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: greyCircle,
+                      alignment: Alignment.center,
+                      child: const Text("+/-", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: greyCircle,
+                      alignment: Alignment.center,
+                      child: const Text("%", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: orangeCircle,
+                      alignment: Alignment.center,
+                      child: const Text("/", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("7", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("8", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("9", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: orangeCircle,
+                      alignment: Alignment.center,
+                      child: const Text("x", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("4", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("5", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("6", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: orangeCircle,
+                      alignment: Alignment.center,
+                      child: const Text("-", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("1", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("2", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: blackCircle,
+                      alignment: Alignment.center,
+                      child: const Text("3", style: TextStyle(fontSize: 30)),
+                    ),
+                    Container(
+                      decoration: orangeCircle,
+                      alignment: Alignment.center,
+                      child: const Text("+", style: TextStyle(fontSize: 30)),
+                    ),
+                  ]),
             ),
+            SizedBox(
+              height: 100,
+              child: GridView.count(
+                  primary: false,
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  children: <Widget>[
+                    Container(
+                      decoration: blueCircle,
+                      alignment: Alignment.center,
+                      child: const Text("0", style: TextStyle(fontSize: 30)),
+                    ),
+                    GridView.count(
+                        primary: false,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        crossAxisCount: 2,
+                        children: <Widget>[
+                          Container(
+                            decoration: blueCircle,
+                            alignment: Alignment.center,
+                            child:
+                                const Text(".", style: TextStyle(fontSize: 30)),
+                          ),
+                          Container(
+                            decoration: orangeCircle,
+                            alignment: Alignment.center,
+                            child:
+                                const Text("=", style: TextStyle(fontSize: 30)),
+                          ),
+                        ]),
+                  ]),
+            )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
       ),
     );
   }
